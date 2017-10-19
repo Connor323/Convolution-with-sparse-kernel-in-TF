@@ -7,16 +7,16 @@ import time
 
 
 try:
-	_tutorial = tf.load_op_library('./build/libconv_sparse.so')
+	_conv_sparse = tf.load_op_library('./build/libconv_sparse.so')
 except Exception as e:
-	_tutorial = tf.load_op_library('./libconv_sparse.so')
-custom_convolution = _tutorial.custom_convolution
+	_conv_sparse = tf.load_op_library('./libconv_sparse.so')
+custom_convolution = _conv_sparse.custom_convolution
 
 input_channel = 32
 output_channel =64
 kernel_size = 11
 batch = 1
-stride = 2
+stride = 1
 tolerance = 0.001
 ratio  = 1
 img_size = (256/ratio , 512/ratio )
@@ -46,7 +46,7 @@ else:
 a = tf.constant(a_data, shape=(a_shape[0], a_shape[1], a_shape[2], a_shape[3]), name="a")
 b = tf.constant(b_data, shape=(b_shape[0], b_shape[1], b_shape[2], b_shape[3]), name="b")
 
-c_cust = custom_convolution(a, b, debug_mode=True, method=0, strides=[1,stride,stride,1])
+c_cust = custom_convolution(a, b, debug_mode=False, method=0, strides=[1,stride,stride,1])
 c = tf.nn.conv2d(a, b, padding="SAME", strides=[1, stride, stride, 1])
 
 with tf.Session() as sess:
@@ -59,11 +59,5 @@ with tf.Session() as sess:
 		result = sess.run(c_cust)
 		print "time costumized: %.3f" % ((time.time() - start_time) * 1000)
 		print "result: ", result.shape, "expected: ", expected.shape
-		# print "result", result
-		# print "expected", expected
 		print "is calculation correct? ", (abs(result - expected) < tolerance).all()
-# diff = (abs(result - expected) > tolerance).astype(int) * 200
 
-# cv2.imwrite("img_expected.png", expected[0, ...].astype(np.uint8))
-# cv2.imwrite("img_result.png", result[0, ...].astype(np.uint8))
-# cv2.imwrite("img_diff.png", diff[0, ...].astype(np.uint8))
