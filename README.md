@@ -10,7 +10,24 @@ TensorFlow implementation of convolution with sparse kernel. This operator is in
 _conv_sparse = tf.load_op_library('path_to_source_file/libconv_sparse.so')
 conv_op = _conv_sparse.custom_convolution
 ```
-------
+
+## Results:
+![kernel size]
+(https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/kernel_size.png)
+
+![input channel]
+(https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_in.png)
+
+![output channel]
+(https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_out.png)
+
+![number of nonzero ratio]
+(https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/nnz.png)
+
+![image size]
+(https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/image_size.png)
+
+
 ## TODO:
  - [ ] Use shared memory for CUDA multithreading
  - [ ] Improve result precision
