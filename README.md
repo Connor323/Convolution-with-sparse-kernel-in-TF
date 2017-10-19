@@ -20,7 +20,7 @@ conv_op = _conv_sparse.custom_convolution
 
 ![ ](./images/nnz.png)
 
-![ ](./images/image_size.png)
+![ ](./images/image.png)
 
 
 ## TODO:
