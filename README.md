@@ -12,15 +12,15 @@ conv_op = _conv_sparse.custom_convolution
 ```
 
 ## Results:
-![kernel size](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/kernel_size.png)
+![alt text](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/kernel_size.png)
 
-![input channel](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_in.png)
+![alt text](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_in.png)
 
-![output channel](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_out.png)
+![alt text](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/ch_out.png)
 
-![number of nonzero ratio](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/nnz.png)
+![alt text](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/nnz.png)
 
-![image size](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/image_size.png)
+![alt text](https://github.com/Connor323/Convolution-with-sparse-kernel-in-TF/tree/master/images/image_size.png)
 
 
 ## TODO:
