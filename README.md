@@ -12,7 +12,7 @@ conv_op = _conv_sparse.custom_convolution
 ```
 
 ## Results:
-![ ](./images/kernel_size.png)
+![ ](./images/kernel.png)
 
 ![ ](./images/ch_in.png)
 
