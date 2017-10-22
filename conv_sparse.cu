@@ -55,7 +55,6 @@ void convolve_global (const dtype * __restrict__ Md, dtype * __restrict__ Rd,
             sum = (dtype)Md[working_pixel] * cooVal_Kdc[i];
             val += sum;
         }
-        // printf("x: %d, y: %d, %d, %d\n", local_pixel % width, local_pixel / width, col_Md, row_Md);
     	Rd[pixel] = val;
     }
 }
@@ -157,7 +156,6 @@ void ImageConvolution(const dtype * __restrict__ M, dtype * cooVal_Kdc, int * co
     
     //Calling the kernel
     for(int b=0; b<batch; b++){
-    	// Transfer Md to the device memory
         int batch_offset_in = b * size_per_batch_input;
         int batch_offset_out = b * size_per_batch_output;
         if (method == 0)
@@ -249,7 +247,8 @@ void launchAddKernel(const dtype* activation, const dtype* kernel, dtype* output
 	                 int kernel_size, int input_channel, int output_channel, int kernel_len,
 	                 int batch, int height, int width, std::vector<int>  strides, 
                      int method, bool debug_mode) {
-	int *nnz, *total_nnz, *start_idx, *max_nnz;
+	// convert dense tensor to sparse in COO format
+    int *nnz, *total_nnz, *start_idx, *max_nnz;
 	int * outch_pts;
     if(debug_mode) printf("type: %s\n", typeid(dtype).name());
 	gpuErrchk(cudaMallocManaged(&nnz, output_channel*sizeof(int)));
