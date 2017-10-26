@@ -50,7 +50,7 @@ This sparse convolution is much faster than the buildin dense convolution in TF 
  - [ ] Improve result precision (the precision for now is about 1e-3)
  - [ ] Add CPU support
  - [ ] Separate the computation of dense-to-sprase within this operation to speed up more (since we only need to convert once during inference)
- - [ ] Fix the inconsistency when stride is over 2 (TF uses the [smallest padding scheme](https://www.tensorflow.org/api_guides/python/nn#Convolution))
+ - [x] Fix the inconsistency when stride is over 2 (TF uses the [smallest padding scheme](https://www.tensorflow.org/api_guides/python/nn#Convolution))
  - [ ] Add gradient for training purpose
 
 ## Reference:

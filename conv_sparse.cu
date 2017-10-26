@@ -24,14 +24,14 @@ template <typename dtype> __global__
 void convolve_global (const dtype * __restrict__ Md, dtype * __restrict__ Rd, 
     int width, int height, int output_rows, int output_cols, int strides_X, int strides_Y, 
     int kernel_size, int channels, int *nnzs, int *start_idxs, int output_channel, 
-    int batch_offset_in, int batch_offset_out, 
+    int batch_offset_in, int batch_offset_out, int padding_offset_row, int padding_offset_col,  
     const dtype * __restrict__ cooVal_Kdc, const int * __restrict__ cooRow_Kdc, 
     const int * __restrict__ cooCol_Kdc, const int * __restrict__ cooDep_Kdc){
 
     int row = blockIdx.y*blockDim.y + threadIdx.y;
     int col = blockIdx.x*blockDim.x + threadIdx.x;
-    int row_Md = row * strides_X;
-    int col_Md = col * strides_Y;
+    int row_Md = row * strides_X + padding_offset_row;
+    int col_Md = col * strides_Y + padding_offset_col;
     int ch_out = blockIdx.z*blockDim.z + threadIdx.z;
     
     if(row < output_rows  &&  col < output_cols && ch_out < output_channel &&
@@ -127,6 +127,15 @@ void ImageConvolution(const dtype * __restrict__ M, dtype * cooVal_Kdc, int * co
     int size_per_batch_input = height * width * input_channel;
     int size_per_batch_output = output_rows * output_cols * output_channel;
 
+    // using min padding 
+    int half_kernel_size = kernel_size / 2;
+    int pad_along_height = height % strides[1] == 0 ? max(kernel_size - strides[1], 0) : max(kernel_size - (height % strides[1]), 0);
+    int pad_along_width = width % strides[1] == 0 ? max(kernel_size - strides[2], 0) : max(kernel_size - (width % strides[2]), 0);
+    int pad_top = pad_along_height / 2;
+    int pad_left = pad_along_width / 2;
+    int padding_offset_row = max(0, half_kernel_size - pad_top);
+    int padding_offset_col = max(0, half_kernel_size - pad_left);
+
     //Time measuring
     cudaEvent_t start, stop;
     float time;
@@ -162,7 +171,7 @@ void ImageConvolution(const dtype * __restrict__ M, dtype * cooVal_Kdc, int * co
             convolve_global<dtype><<<dimGrid,dimBlock>>>(M,R,width,height,output_rows,output_cols,
                                                  strides[1],strides[2],kernel_size,
     	                                         input_channel,nnz,start_idx,output_channel, 
-                                                 batch_offset_in, batch_offset_out,
+                                                 batch_offset_in, batch_offset_out, padding_offset_row, padding_offset_col, 
                                                  cooVal_Kdc,cooRow_Kdc,cooCol_Kdc,cooDep_Kdc);
         else{
             throw std::invalid_argument("not support shared memory version for now\n");

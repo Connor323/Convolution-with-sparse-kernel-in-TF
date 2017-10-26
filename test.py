@@ -45,6 +45,6 @@ with tf.Session() as sess:
 	start_time = time.time()
 	result = sess.run(result_Sparse)
 	print "time costumized: %.3f" % ((time.time() - start_time) * 1000)
-	print "result: ", result.shape, "expected: ", expected.shape
+	print "result shape: ", result.shape, "expected shape: ", expected.shape
 	print "is calculation correct? ", (abs(result - expected) < tolerance).all()
 
