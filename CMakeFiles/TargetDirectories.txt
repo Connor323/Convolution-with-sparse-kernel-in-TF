@@ -1,3 +1,0 @@
-/home/hanxiang/projects/texture_segmentation/Convolution-with-sparse-kernel-in-TF/CMakeFiles/edit_cache.dir
-/home/hanxiang/projects/texture_segmentation/Convolution-with-sparse-kernel-in-TF/CMakeFiles/rebuild_cache.dir
-/home/hanxiang/projects/texture_segmentation/Convolution-with-sparse-kernel-in-TF/CMakeFiles/conv_sparse.dir

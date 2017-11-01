@@ -1,1 +1,0 @@
-/usr/bin/c++  -fPIC --std=c++11 -fPIC -O2 -D_GLIBCXX_USE_CXX11_ABI=0 -D GOOGLE_CUDA=1 -g  -shared -Wl,-soname,libconv_sparse.so -o libconv_sparse.so CMakeFiles/conv_sparse.dir/conv_sparse.cc.o CMakeFiles/conv_sparse.dir/conv_sparse_generated_conv_sparse.cu.o /usr/local/cuda-8.0/lib64/libcudart_static.a -lpthread -ldl /usr/lib/x86_64-linux-gnu/librt.so 
