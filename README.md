@@ -43,13 +43,13 @@ Following figures show the current performance with respect to different hyperpa
 ![ ](./images/image.png)
 
 ## Discussion:
-This sparse convolution is much faster than the buildin dense convolution in TF in most of case, besides with larger ratio of NNZ (not sparse anymore) or the smaller size of input. Since the acceleration becomes more prominent when the size of input is larger (especially along height and width channels), the overall performance of a small input could be mediocre for now, but I will continue improving the proformance.   
+This sparse convolution is much faster than the building dense convolution in TF in most of case, besides with larger ratio of NNZ (not sparse anymore) or the smaller size of input. Since the acceleration becomes more prominent when the size of input is larger (especially along height and width channels), the overall performance of a small input could be mediocre for now, but I will continue improving the performance.   
 
 ## TODO:
  - [ ] Use shared memory for CUDA multithreading
  - [ ] Improve result precision (the precision for now is about 1e-3)
  - [ ] Add CPU support
- - [ ] Separate the computation of dense-to-sprase within this operation to speed up more (since we only need to convert once during inference)
+ - [ ] Separate the computation of dense-to-sparse within this operation to speed up more (since we only need to convert once during inference)
  - [x] Fix the inconsistency when stride is over 2 (TF uses the [smallest padding scheme](https://www.tensorflow.org/api_guides/python/nn#Convolution))
  - [ ] Add gradient for training purpose
 
